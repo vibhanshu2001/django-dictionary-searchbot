@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}{{ results.word | title }} | Definition of {{ results.word | title }} by Ging Dictionary{% endblock %}
+{% block img %}<img class="profile-image mb-3 rounded-circle mx-auto" src="https://image.flaticon.com/icons/png/512/2932/2932802.png" alt="{{ results.word | title }} | Definition of {{ results.word | title }} by Ging Dictionary" >{% endblock %}
+{% block content %}
+<div>
+    <h2 align="center"> Entered word is: <span style="color: red;">{{ results.word | title }}</span> </h2>
+    <br>
+        <div class="card" style="border-radius: 13px !important;">
+            <div class="card-body">
+                <b>Meaning: </b>{{results.meaning}}
+            </div>
+        </div>
+        <br>
+        <div class="card" style="border-radius: 13px !important;">
+            <div class="card-body">
+                <b>Synonyms: </b>
+                {% if not se %}
+                <span style="color:red">Synonyms not found</span>
+                
+                {% else %}
+                {% for s in se %}
+                <a href="/search?word={{s}}">{{s}}</a>,
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    <br>
+    
+        <div class="card" style="border-radius: 13px !important;">
+            <div class="card-body">
+                <b>Antonyms: </b>
+                {% if not ae %}
+                <span style="color:red">Antonyms not found</span>
+                
+                {% else %}
+                {% for a in ae %}
+                <a href="/search?word={{a}}">{{a}}</a>,
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+</div>
+{% endblock %}
